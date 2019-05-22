@@ -1,0 +1,140 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "SHISHICAI",
+    "title": "SHISHICAI",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4006/api/v1/shishicai",
+  "paths": {
+    "/huoqu": {
+      "get": {
+        "description": "开奖",
+        "tags": [
+          "games"
+        ],
+        "summary": "开奖",
+        "operationId": "HuoquResponse",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/HuoquResponse"
+          },
+          "400": {
+            "$ref": "#/responses/HuoquError"
+          }
+        }
+      }
+    },
+    "/xuanhao": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "选号",
+        "tags": [
+          "games"
+        ],
+        "summary": "选号",
+        "operationId": "XuanhaoParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "betMultiple": {
+                  "description": "倍数",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "BetMultiple"
+                },
+                "betNumber": {
+                  "description": "投注号码",
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  },
+                  "x-go-name": "BetNumber"
+                },
+                "betRule": {
+                  "description": "下注类型",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "BetRule"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "inputNumber": {
+                  "description": "投注数",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "InputNumber"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "HuoquResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

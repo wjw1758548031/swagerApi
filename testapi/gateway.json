@@ -1,0 +1,55 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "网关API",
+    "title": "网关API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4005/api/v1/",
+  "paths": {
+    "/account/upload": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "单独文件上传",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "单独文件上传",
+        "operationId": "UploadParam",
+        "parameters": [
+          {
+            "type": "file",
+            "name": "UpFile",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UploadResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "UploadResponse": {
+      "schema": {
+        "type": "object"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

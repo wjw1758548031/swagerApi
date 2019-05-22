@@ -1,0 +1,459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "魔方交易市场API",
+    "title": "魔方交易市场API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4003/api/v1",
+  "paths": {
+    "/admin/markets/del": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "填加或修改交易对",
+        "tags": [
+          "市场"
+        ],
+        "summary": "填加或修改交易对",
+        "operationId": "MarketsDelParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "base": {
+                  "description": "计价币",
+                  "type": "string",
+                  "x-go-name": "Base"
+                },
+                "coin": {
+                  "description": "交易币",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          }
+        }
+      }
+    },
+    "/admin/markets/update": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "填加或修改交易对",
+        "tags": [
+          "市场"
+        ],
+        "summary": "填加或修改交易对",
+        "operationId": "MarketsUpdateParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amountPre": {
+                  "description": "数量精度",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "AmountPre"
+                },
+                "base": {
+                  "description": "计价币",
+                  "type": "string",
+                  "x-go-name": "Base"
+                },
+                "coin": {
+                  "description": "交易币",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "isTrade": {
+                  "description": "是否交易",
+                  "type": "boolean",
+                  "x-go-name": "IsTrade"
+                },
+                "minPrice": {
+                  "description": "最小交易价格",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "MinPrice"
+                },
+                "pricePre": {
+                  "description": "价格精度",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "PricePre"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          }
+        }
+      }
+    },
+    "/market/cancel": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "取消订单",
+        "tags": [
+          "市场"
+        ],
+        "summary": "取消订单",
+        "operationId": "CancelOrderParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "订单号",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CancelOrderResponse"
+          }
+        }
+      }
+    },
+    "/market/depth": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "取消订单",
+        "tags": [
+          "市场"
+        ],
+        "summary": "订单深度",
+        "operationId": "DepthParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "limit": {
+                  "description": "数量",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Limit"
+                },
+                "market": {
+                  "description": "交易市场",
+                  "type": "string",
+                  "x-go-name": "Market"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/DepthResponse"
+          }
+        }
+      }
+    },
+    "/market/kline": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "K线",
+        "tags": [
+          "市场"
+        ],
+        "summary": "K线",
+        "operationId": "KlineParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Market",
+            "description": "市场 BTC_C2C",
+            "name": "market",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Interval",
+            "description": "间隔",
+            "name": "interval",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SucessResponse"
+          }
+        }
+      }
+    },
+    "/market/myOrders": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户挂单",
+        "tags": [
+          "市场"
+        ],
+        "summary": "获取用户挂单",
+        "operationId": "MyOrdersParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          }
+        }
+      }
+    },
+    "/market/order": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "下买卖单",
+        "tags": [
+          "市场"
+        ],
+        "summary": "下单",
+        "operationId": "OrderParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "market": {
+                  "description": "市场 BTC_C2C",
+                  "type": "string",
+                  "x-go-name": "Market"
+                },
+                "price": {
+                  "description": "价格",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Price"
+                },
+                "type": {
+                  "description": "1买入 -1卖出",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    },
+    "/market/tickers": {
+      "get": {
+        "description": "获取市场行情",
+        "tags": [
+          "市场"
+        ],
+        "summary": "获取市场行情",
+        "operationId": "Tickers",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TickersResponse"
+          }
+        }
+      }
+    },
+    "/markets": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取交易市场列表",
+        "tags": [
+          "市场"
+        ],
+        "summary": "获取交易市场列表",
+        "operationId": "MarketsParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "CancelOrderResponse": {
+      "description": "取消下单",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "DepthResponse": {
+      "description": "深度",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "asks": {
+                "description": "卖单",
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "x-go-name": "Asks"
+              },
+              "bids": {
+                "description": "买单",
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "x-go-name": "Bids"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "TickersResponse": {
+      "description": "市场行情",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "EOS_CNY": {
+                "type": "object",
+                "properties": {
+                  "baseVol": {
+                    "description": "成交额",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "BaseVol"
+                  },
+                  "change": {
+                    "description": "涨跌幅",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Change"
+                  },
+                  "hight": {
+                    "description": "最高",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Hight"
+                  },
+                  "last": {
+                    "description": "最后成交价",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Last"
+                  },
+                  "name": {
+                    "description": "交易对",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Name"
+                  },
+                  "vol": {
+                    "description": "成交量",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Vol"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "支付API",
+    "title": "支付API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4002/api/v1",
+  "paths": {
+    "/transfer": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "转帐",
+        "tags": [
+          "支付"
+        ],
+        "summary": "转帐",
+        "operationId": "TransferParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "description": "对方帐户，邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Address"
+                },
+                "amount": {
+                  "description": "数量",
+                  "type": "string",
+                  "x-go-name": "Amount"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "memo": {
+                  "description": "备注",
+                  "type": "string",
+                  "x-go-name": "Memo"
+                },
+                "payPassword": {
+                  "description": "支付密码，未设置可为空",
+                  "type": "string",
+                  "x-go-name": "PayPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/transfer/history": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "转帐历史",
+        "tags": [
+          "支付"
+        ],
+        "summary": "转帐历史",
+        "operationId": "TransferHistoryParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TransferHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/withdraw": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "商户结算请求　(提现)",
+        "tags": [
+          "支付"
+        ],
+        "summary": "商户结算请求　(提现)",
+        "operationId": "PayWithdrawParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "bankName": {
+                  "type": "string",
+                  "x-go-name": "BankName"
+                },
+                "bankType": {
+                  "type": "string",
+                  "x-go-name": "BankType"
+                },
+                "cardNumber": {
+                  "type": "string",
+                  "x-go-name": "CardNumber"
+                },
+                "coin": {
+                  "type": "string",
+                  "x-go-name": "Coin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/withdraw/history": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "提现记录列表",
+        "tags": [
+          "支付"
+        ],
+        "summary": "提现记录列表",
+        "operationId": "WithdrawHistoryParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/WithdrawHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/wxpay": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "微信支付接口",
+        "tags": [
+          "支付"
+        ],
+        "summary": "微信支付接口",
+        "operationId": "WxpayParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "string",
+                  "x-go-name": "Amount"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/WxpayResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "WithdrawHistoryResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "description": "地址",
+                    "type": "string",
+                    "x-go-name": "Address"
+                  },
+                  "amount": {
+                    "description": "数量",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Amount"
+                  },
+                  "banktype": {
+                    "description": "bankType",
+                    "type": "string",
+                    "x-go-name": "BankType"
+                  },
+                  "coin": {
+                    "description": "币种",
+                    "type": "string",
+                    "x-go-name": "Coin"
+                  },
+                  "create": {
+                    "description": "创建",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Create"
+                  },
+                  "orderId": {
+                    "description": "订单号",
+                    "type": "string",
+                    "x-go-name": "OrderId"
+                  },
+                  "status": {
+                    "description": "状态",
+                    "type": "integer",
+                    "format": "int32",
+                    "x-go-name": "Status"
+                  },
+                  "type": {
+                    "description": "充值 提现",
+                    "type": "integer",
+                    "format": "int32",
+                    "x-go-name": "Type"
+                  },
+                  "uid": {
+                    "description": "用户ID",
+                    "type": "string",
+                    "x-go-name": "Uid"
+                  },
+                  "update": {
+                    "description": "更新",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Update"
+                  }
+                },
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "WxpayResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "appId": {
+                  "type": "string",
+                  "x-go-name": "AppId"
+                },
+                "nonceStr": {
+                  "type": "string",
+                  "x-go-name": "NonceStr"
+                },
+                "package": {
+                  "type": "string",
+                  "x-go-name": "Package"
+                },
+                "paySign": {
+                  "type": "string",
+                  "x-go-name": "PaySign"
+                },
+                "signType": {
+                  "type": "string",
+                  "x-go-name": "SignType"
+                },
+                "timeStamp": {
+                  "type": "string",
+                  "x-go-name": "TimeStamp"
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

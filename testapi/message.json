@@ -1,0 +1,192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "通知API",
+    "title": "通知API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4012/api/v1",
+  "paths": {
+    "/get_message": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "查询消息列表",
+        "tags": [
+          "查询消息列表"
+        ],
+        "summary": "查询消息列表",
+        "operationId": "GetMessage",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_num": {
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "PageNum"
+                },
+                "page_size": {
+                  "description": "in: query",
+                  "type": "string",
+                  "x-go-name": "PageSize"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/send_message": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "发送消息列表",
+        "tags": [
+          "发送消息列表"
+        ],
+        "summary": "发送消息列表",
+        "operationId": "SendMessage",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "x-go-name": "Content"
+                },
+                "message_type": {
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "MessageType"
+                },
+                "receive_uid": {
+                  "description": "in: query",
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "x-go-name": "ReceiveUid"
+                },
+                "title": {
+                  "type": "string",
+                  "x-go-name": "Title"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/update_message": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除消息或变为以阅读",
+        "tags": [
+          "删除消息或变为以阅读"
+        ],
+        "summary": "删除消息或变为以阅读",
+        "operationId": "UpdateMessage",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message_id": {
+                  "description": "in: query",
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "x-go-name": "MessageId"
+                },
+                "status": {
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Status"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

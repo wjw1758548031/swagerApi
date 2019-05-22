@@ -1,0 +1,1793 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "后台管理API",
+    "title": "后台管理API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4005/api/v1",
+  "paths": {
+    "/addAdmin": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "添加管理员",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "添加管理员",
+        "operationId": "AddAdminParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "level": {
+                  "description": "Level",
+                  "type": "string",
+                  "x-go-name": "Level"
+                },
+                "siteId": {
+                  "description": "SiteId",
+                  "type": "string",
+                  "x-go-name": "SiteId"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/addLink": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "添加Banner",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "添加Banner",
+        "operationId": "AddBannerParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "banner": {
+                  "description": "网站名称",
+                  "type": "string",
+                  "x-go-name": "Banner"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/addNews": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "添加新闻",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "添加新闻",
+        "operationId": "AddNewsParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "content": {
+                  "type": "string",
+                  "x-go-name": "Content"
+                },
+                "cover": {
+                  "type": "string",
+                  "x-go-name": "Cover"
+                },
+                "title": {
+                  "type": "string",
+                  "x-go-name": "Title"
+                },
+                "type": {
+                  "type": "string",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AddNewsResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/adminList": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "管理员列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "管理员列表",
+        "operationId": "GetAdminListParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetAdminListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/balance/add": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "加钱或扣钱",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "加钱或扣钱",
+        "operationId": "BalanceAddParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "touid": {
+                  "description": "对方ID",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "ToUID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BalanceAddResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/changeSiteInfo": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改网站基本设置",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "修改网站基本设置",
+        "operationId": "ChangeSiteInfoParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "平台币",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "domains": {
+                  "description": "绑定域名",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "x-go-name": "Domains"
+                },
+                "email": {
+                  "description": "Email",
+                  "type": "string",
+                  "x-go-name": "Email"
+                },
+                "facebook": {
+                  "description": "FaceBook",
+                  "type": "string",
+                  "x-go-name": "Facebook"
+                },
+                "logo": {
+                  "description": "网站LOGO",
+                  "type": "string",
+                  "x-go-name": "Logo"
+                },
+                "openSignup": {
+                  "description": "开启注册",
+                  "type": "boolean",
+                  "x-go-name": "OpenSignup"
+                },
+                "openSite": {
+                  "description": "开启网站",
+                  "type": "boolean",
+                  "x-go-name": "OpenSite"
+                },
+                "qq": {
+                  "description": "QQ",
+                  "type": "string",
+                  "x-go-name": "QQ"
+                },
+                "telegram": {
+                  "description": "电报",
+                  "type": "string",
+                  "x-go-name": "Telegram"
+                },
+                "title": {
+                  "description": "网站标题",
+                  "type": "string",
+                  "x-go-name": "Title"
+                },
+                "twitter": {
+                  "description": "Twitter",
+                  "type": "string",
+                  "x-go-name": "Twitter"
+                },
+                "zendesk": {
+                  "description": "Zendesk",
+                  "type": "object",
+                  "x-go-name": "Zendesk"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/changeUserInfo/{id}": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改单条用户信息",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "修改单条用户信息",
+        "operationId": "ChangeUserInfoParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authtype": {
+                  "description": "敏感操作驗證",
+                  "type": "string",
+                  "x-go-name": "AuthType"
+                },
+                "disable": {
+                  "description": "禁用",
+                  "type": "object",
+                  "x-go-name": "Disable"
+                },
+                "email": {
+                  "description": "Email",
+                  "type": "string",
+                  "x-go-name": "Email"
+                },
+                "idnumber": {
+                  "description": "身份证号码",
+                  "type": "string",
+                  "x-go-name": "IDNumber"
+                },
+                "mobile": {
+                  "description": "手机号",
+                  "type": "string",
+                  "x-go-name": "Mobile"
+                },
+                "truename": {
+                  "description": "真实姓名",
+                  "type": "string",
+                  "x-go-name": "TrueName"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ChangeUserInfoResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/coins": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取平台币种",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取平台币种",
+        "operationId": "CoinsParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CoinsResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/coins/addAndEdit": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "填加修改平台币种",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "填加修改平台币种",
+        "operationId": "CoinsAddEditParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "data": {
+                  "description": "数据根据情况构造",
+                  "type": "object",
+                  "x-go-name": "Data"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CoinsAddEditResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/coins/del": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除平台币种",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "删除平台币种",
+        "operationId": "CoinsDelParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CoinsDelResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/delAdmin": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除管理员",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "删除管理员",
+        "operationId": "DelAdminParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "description": "SiteInfo _id",
+                  "type": "string",
+                  "x-go-name": "ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/delBanner": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除Banner",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "删除Banner",
+        "operationId": "DelBannerParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "id",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/delLink": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除友情链接",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "删除友情链接",
+        "operationId": "DelLinkParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "id",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/delNews": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除新闻",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "删除新闻",
+        "operationId": "DelNewsParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "x-go-name": "ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/editAdmin/{id}": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改管理员",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "修改管理员",
+        "operationId": "EditAdminParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "description": "等级",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Level"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/editNews": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改编辑新闻",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "修改编辑新闻",
+        "operationId": "EditNewsParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "x-go-name": "ID"
+                },
+                "coin": {
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "content": {
+                  "type": "string",
+                  "x-go-name": "Content"
+                },
+                "cover": {
+                  "type": "string",
+                  "x-go-name": "Cover"
+                },
+                "title": {
+                  "type": "string",
+                  "x-go-name": "Title"
+                },
+                "type": {
+                  "type": "string",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/finance/balance": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "财务资产",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "财务资产",
+        "operationId": "FinanceBalanceParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Coin",
+            "name": "coin",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/FinanceBalanceResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/finance/balances": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "财务资产列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "财务资产列表",
+        "operationId": "FinanceBalancesParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/FinanceBalancesResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/getUserInfo/{id}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取单条指定用户信息",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取单条指定用户信息",
+        "operationId": "GetUserInfoParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetUserInfoResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/getUserStatis": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "认证用户统计",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "认证用户统计",
+        "operationId": "GetUserStatisParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Level",
+            "name": "level",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetUserStatisResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/getUsers": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取用户列表",
+        "operationId": "GetUsersParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetUsersResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/getUsersByAuthLevel": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户认证列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取用户认证列表",
+        "operationId": "GetUsersByAuthLevelParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "AuthLevel",
+            "description": "实名认证等级 1绑定了身分证号或护照号 2.上传身分证或护照照片 3.视频验证过",
+            "name": "authLevel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetUsersByAuthLevelResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "description": "获取网站配置信息",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取网站配置信息",
+        "operationId": "SiteInfo",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/InfoResponse"
+          }
+        }
+      }
+    },
+    "/news/list": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "新闻消息列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "新闻消息列表",
+        "operationId": "NewsListParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Coin",
+            "name": "coin",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Type",
+            "name": "type",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/news/search/{action}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "新闻公告搜索",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "新闻公告搜索",
+        "operationId": "NewsSearchParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Action",
+            "name": "action",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsSearchResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/search/{action}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "搜索",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "搜索",
+        "operationId": "SearchParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Action",
+            "name": "action",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SearchResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "description": "登录",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "登录",
+        "operationId": "AdminSigninParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "description": "验证码,可能是OTP、邮箱、短信",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AdminSigninResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signin/getCode": {
+      "post": {
+        "description": "登录时获取登录验证码",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "登录时获取登录验证码",
+        "operationId": "SigninCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SigninCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/siteInfo": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取网站基本信息",
+        "tags": [
+          "后台管理",
+          ""
+        ],
+        "summary": "获取网站基本信息",
+        "operationId": "GetSiteInfoParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/siteInfoList": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "平台列表",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "平台列表",
+        "operationId": "SiteInfoListParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SiteInfoListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/transfer/history": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取转帐记录",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取转帐记录",
+        "operationId": "TransferHitoryParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Skip",
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "UID",
+            "name": "uid",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "ToUID",
+            "name": "toUid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TransferHitoryResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/wallet/history": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取钱包充提记录",
+        "tags": [
+          "后台管理"
+        ],
+        "summary": "获取钱包充提记录",
+        "operationId": "WalletHitoryParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Skip",
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "P",
+            "name": "p",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "UID",
+            "name": "uid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TransferHitoryResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "AdminSigninResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "description": "Token信息",
+            "type": "string",
+            "x-go-name": "Token"
+          }
+        }
+      }
+    },
+    "GetAdminListResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetSiteInfoParam": {
+      "schema": {
+        "type": "object"
+      }
+    },
+    "GetUserInfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "用户数据",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetUserStatisResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetUsersByAuthLevelResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetUsersResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "InfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "authLevel": {
+            "description": "验证级别",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "AuthLevel"
+          },
+          "baseCoinList": {
+            "description": "支付币种列表",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-go-name": "BaseCoinList"
+          },
+          "coins": {
+            "description": "平台支持币种",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种",
+                "type": "object",
+                "properties": {
+                  "alias": {
+                    "description": "简称",
+                    "type": "string",
+                    "x-go-name": "Alias"
+                  },
+                  "chineseName": {
+                    "description": "中文名",
+                    "type": "string",
+                    "x-go-name": "ChineseName"
+                  },
+                  "decimal": {
+                    "description": "小数位数",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Decimal"
+                  },
+                  "deposit": {
+                    "description": "开启充值",
+                    "type": "boolean",
+                    "x-go-name": "Deposit"
+                  },
+                  "englishName": {
+                    "description": "英文名",
+                    "type": "string",
+                    "x-go-name": "EnglishName"
+                  },
+                  "markets": {
+                    "description": "支持的交易市场 [\"C2C\", \"BTC\", \"USDT\"]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "x-go-name": "Markets"
+                  },
+                  "state": {
+                    "description": "启用",
+                    "type": "boolean",
+                    "x-go-name": "State"
+                  },
+                  "trade": {
+                    "description": "开启交易",
+                    "type": "boolean",
+                    "x-go-name": "Trade"
+                  },
+                  "tradeFee": {
+                    "description": "交易手续费 0.1%",
+                    "type": "string",
+                    "x-go-name": "TradeFee"
+                  },
+                  "withdraw": {
+                    "description": "开启提现",
+                    "type": "boolean",
+                    "x-go-name": "Withdraw"
+                  },
+                  "withdrawalFee": {
+                    "description": "提现手续费 1%",
+                    "type": "string",
+                    "x-go-name": "WithdrawalFee"
+                  },
+                  "withdrawalLimit": {
+                    "description": "至少提现",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "WithdrawalLimit"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Coins"
+          },
+          "email": {
+            "description": "邮箱",
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "mobile": {
+            "description": "手机",
+            "type": "string",
+            "x-go-name": "Mobile"
+          },
+          "prices": {
+            "description": "市场价格",
+            "type": "object",
+            "x-go-name": "Prices"
+          },
+          "siteinfo": {
+            "description": "网站信息",
+            "type": "object",
+            "properties": {
+              "links": {
+                "description": "友情链接列表",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "x-go-name": "Links"
+              },
+              "logo": {
+                "description": "网站LOGO地址",
+                "type": "string",
+                "x-go-name": "Logo"
+              },
+              "title": {
+                "description": "网站标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "SiteInfo"
+          },
+          "truename": {
+            "description": "真实姓名",
+            "type": "string",
+            "x-go-name": "TrueName"
+          },
+          "uid": {
+            "description": "用户ID",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "UID"
+          },
+          "uid2": {
+            "description": "objectid",
+            "type": "string",
+            "x-go-name": "UID2"
+          },
+          "username": {
+            "description": "用户名",
+            "type": "string",
+            "x-go-name": "UserName"
+          }
+        }
+      }
+    },
+    "NewsListesponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SigninCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SiteInfoListResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "data": {
+                "description": "结果列表",
+                "type": "object",
+                "x-go-name": "Data"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SuccessResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

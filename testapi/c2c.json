@@ -1,0 +1,391 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "C2C",
+    "title": "C2C",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4004/api/v1",
+  "paths": {
+    "/admin/c2c/set": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "设置C2C",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "设置C2C",
+        "operationId": "C2CSetParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "buyPrice": {
+                  "description": "买币",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "BuyPrice"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "max": {
+                  "description": "最大交易数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Max"
+                },
+                "min": {
+                  "description": "最小交易数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Min"
+                },
+                "pause": {
+                  "description": "是否暂停",
+                  "type": "boolean",
+                  "x-go-name": "Pause"
+                },
+                "sellPrice": {
+                  "description": "卖币",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "SellPrice"
+                },
+                "untreated": {
+                  "description": "未处理数量",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Untreated"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/buy/confirm": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "确认买单",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "确认买单",
+        "operationId": "BuyConfirmParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "订单号",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    },
+    "/buyAndSell": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "下买单和卖单",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "下买单和卖单",
+        "operationId": "BuyAndSellParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "price": {
+                  "description": "价格",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Price"
+                },
+                "type": {
+                  "description": "数量",
+                  "type": "string",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    },
+    "/c2c": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取C2C设置",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "获取C2C设置",
+        "operationId": "C2CParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/cancel": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "描述",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "取消订单",
+        "operationId": "CancelParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "订单号",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CancelResponse"
+          }
+        }
+      }
+    },
+    "/merchantTradeList": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "描述",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "代理商充值提现记录",
+        "operationId": "MerchantTradeListParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Type",
+            "description": "提现状态",
+            "name": "type",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Result",
+            "description": "订单状态",
+            "name": "result",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/merchantTradeListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/sell/confirm": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "确认卖单",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "确认卖单",
+        "operationId": "SellConfirmParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "订单号",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    },
+    "/user/tradelist": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "用户充值提现记录列表",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "用户充值提现记录列表",
+        "operationId": "UserTradeListParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "P",
+            "description": "页数",
+            "name": "p",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Limit",
+            "description": "每页显示条数",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Result",
+            "description": "0未完成 1完成 2取消",
+            "name": "result",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserTradeListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

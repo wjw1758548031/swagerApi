@@ -1,0 +1,1098 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "魔方系统基础API",
+    "title": "魔方系统基础API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4001/api/v3",
+  "paths": {
+    "/account/authLevel1": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "实名认证1级",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "实名认证1级",
+        "operationId": "Authlevel1Param",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "description": "证件号",
+                  "type": "string",
+                  "x-go-name": "Number"
+                },
+                "truename": {
+                  "description": "真实姓名",
+                  "type": "string",
+                  "x-go-name": "TrueName"
+                },
+                "type": {
+                  "description": "证件类型passport,idcard",
+                  "type": "string",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/Authlevel1Response"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/balances": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户资金",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取用户资金",
+        "operationId": "Balances",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BalancesResponse"
+          }
+        }
+      }
+    },
+    "/account/changePassword": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "改变密码",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "改变密码",
+        "operationId": "ChangePasswordParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "oldPassword",
+                "newPassword"
+              ],
+              "properties": {
+                "newPassword": {
+                  "description": "新密码",
+                  "type": "string",
+                  "x-go-name": "NewPassword"
+                },
+                "oldPassword": {
+                  "description": "老密码",
+                  "type": "string",
+                  "x-go-name": "OldPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ChangePasswordResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/createWalletAddress": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "创建钱包地址",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "创建钱包地址",
+        "operationId": "CreateWalletAddressParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "是否成功",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CreateWalletAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/c2c/amountLimit": {
+      "get": {
+        "description": "描述",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "标题",
+        "operationId": "AmountLimit",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AmountLimitResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/c2c/ce": {
+      "get": {
+        "description": "描述",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "标题",
+        "operationId": "CE",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/c2c/depositAndWithdraw": {
+      "get": {
+        "description": "描述",
+        "tags": [
+          "C2C"
+        ],
+        "summary": "标题",
+        "operationId": "DepositAndWithdraw",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/DepositAndWithdrawResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "description": "获取网站配置信息",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取网站配置信息",
+        "operationId": "SiteInfo",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/InfoResponse"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "登陆",
+        "tags": [
+          "公共"
+        ],
+        "summary": "登陆",
+        "operationId": "SigninParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "description": "验证码,可能是OTP、邮箱、短信",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "expires": {
+                  "description": "过期时间,1为1天",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Expires"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/market/order": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "下买卖单",
+        "tags": [
+          "市场"
+        ],
+        "summary": "下单",
+        "operationId": "OrderParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "market": {
+                  "description": "市场 BTC_C2C",
+                  "type": "string",
+                  "x-go-name": "Market"
+                },
+                "price": {
+                  "description": "价格",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Price"
+                },
+                "type": {
+                  "description": "1买入 -1卖出",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/OrderResponse"
+          }
+        }
+      }
+    },
+    "/market/tickers": {
+      "get": {
+        "description": "获取市场行情",
+        "tags": [
+          "市场"
+        ],
+        "summary": "获取市场行情",
+        "operationId": "Tickers",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TickersResponse"
+          }
+        }
+      }
+    },
+    "/news/list": {
+      "get": {
+        "description": "获新闻列表",
+        "tags": [
+          "新闻"
+        ],
+        "summary": "获新闻列表",
+        "operationId": "NewsList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsListResponse"
+          }
+        }
+      }
+    },
+    "/news/show/{id}": {
+      "get": {
+        "description": "获取新闻详细内容",
+        "tags": [
+          "新闻"
+        ],
+        "operationId": "NewsShowParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsShowResponse"
+          }
+        }
+      }
+    },
+    "/notice/list": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取通知列表",
+        "tags": [
+          "通知"
+        ],
+        "summary": "获取通知列表",
+        "operationId": "NoticeList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NoticeListResponse"
+          }
+        }
+      }
+    },
+    "/notice/show/{id}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取通知详细内容",
+        "tags": [
+          "通知"
+        ],
+        "summary": "获取通知详细内容",
+        "operationId": "NoticeShowParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NoticeShowResponse"
+          }
+        }
+      }
+    },
+    "/prices": {
+      "get": {
+        "description": "获取市场价格",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取市场价格",
+        "operationId": "GetPrices",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetPricesResponse"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "description": "用户注册",
+        "tags": [
+          "公共"
+        ],
+        "summary": "注册",
+        "operationId": "SignupParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "description": "验证码,可能是OTP、邮箱、短信",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "expires": {
+                  "description": "过期时间,1为1天",
+                  "type": "string",
+                  "x-go-name": "Expires"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                },
+                "referrerId": {
+                  "description": "推荐人ID",
+                  "type": "string",
+                  "x-go-name": "ReferrerId"
+                },
+                "username": {
+                  "description": "用户名",
+                  "type": "string",
+                  "x-go-name": "UserName"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signup/getCode": {
+      "post": {
+        "description": "注册时获取注册验证码",
+        "tags": [
+          "公共"
+        ],
+        "summary": "注册时获取注册验证码",
+        "operationId": "SignupCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignupCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "AmountLimitWithdrawResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "Authlevel1Response": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BalancesResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "余额",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种",
+                "type": "object",
+                "properties": {
+                  "available": {
+                    "description": "可用余额",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Available"
+                  },
+                  "freeze": {
+                    "description": "冻结",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Freeze"
+                  },
+                  "lock": {
+                    "description": "锁定",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Lock"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "CeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ChangePasswordResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "CreateWalletAddressResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "DepositAndWithdrawResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetPricesResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "价格",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种价格",
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "InfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "authLevel": {
+            "description": "验证级别",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "AuthLevel"
+          },
+          "baseCoinList": {
+            "description": "支付币种列表",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-go-name": "BaseCoinList"
+          },
+          "coins": {
+            "description": "平台支持币种",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种",
+                "type": "object",
+                "properties": {
+                  "alias": {
+                    "description": "简称",
+                    "type": "string",
+                    "x-go-name": "Alias"
+                  },
+                  "chineseName": {
+                    "description": "中文名",
+                    "type": "string",
+                    "x-go-name": "ChineseName"
+                  },
+                  "decimal": {
+                    "description": "小数位数",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Decimal"
+                  },
+                  "deposit": {
+                    "description": "开启充值",
+                    "type": "boolean",
+                    "x-go-name": "Deposit"
+                  },
+                  "englishName": {
+                    "description": "英文名",
+                    "type": "string",
+                    "x-go-name": "EnglishName"
+                  },
+                  "markets": {
+                    "description": "支持的交易市场 [\"C2C\", \"BTC\", \"USDT\"]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "x-go-name": "Markets"
+                  },
+                  "state": {
+                    "description": "启用",
+                    "type": "boolean",
+                    "x-go-name": "State"
+                  },
+                  "trade": {
+                    "description": "开启交易",
+                    "type": "boolean",
+                    "x-go-name": "Trade"
+                  },
+                  "tradeFee": {
+                    "description": "交易手续费 0.1%",
+                    "type": "string",
+                    "x-go-name": "TradeFee"
+                  },
+                  "withdraw": {
+                    "description": "开启提现",
+                    "type": "boolean",
+                    "x-go-name": "Withdraw"
+                  },
+                  "withdrawalFee": {
+                    "description": "提现手续费 1%",
+                    "type": "string",
+                    "x-go-name": "WithdrawalFee"
+                  },
+                  "withdrawalLimit": {
+                    "description": "至少提现",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "WithdrawalLimit"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Coins"
+          },
+          "email": {
+            "description": "邮箱",
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "mobile": {
+            "description": "手机",
+            "type": "string",
+            "x-go-name": "Mobile"
+          },
+          "prices": {
+            "description": "市场价格",
+            "type": "object",
+            "x-go-name": "Prices"
+          },
+          "siteinfo": {
+            "description": "网站信息",
+            "type": "object",
+            "properties": {
+              "links": {
+                "description": "友情链接列表",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "x-go-name": "Links"
+              },
+              "logo": {
+                "description": "网站LOGO地址",
+                "type": "string",
+                "x-go-name": "Logo"
+              },
+              "title": {
+                "description": "网站标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "SiteInfo"
+          },
+          "truename": {
+            "description": "真实姓名",
+            "type": "string",
+            "x-go-name": "TrueName"
+          },
+          "uid": {
+            "description": "用户ID",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "UID"
+          },
+          "uid2": {
+            "description": "objectid",
+            "type": "string",
+            "x-go-name": "UID2"
+          },
+          "username": {
+            "description": "用户名",
+            "type": "string",
+            "x-go-name": "UserName"
+          }
+        }
+      }
+    },
+    "NewsShowResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "description": "文章ID",
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "content": {
+                "description": "新闻内容",
+                "type": "string",
+                "x-go-name": "Content"
+              },
+              "date": {
+                "description": "新闻时间",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Date"
+              },
+              "title": {
+                "description": "新闻标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "NoticeListResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "resultList": {
+                "description": "结果列表",
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "description": "文章ID",
+                    "type": "string",
+                    "x-go-name": "ID"
+                  },
+                  "date": {
+                    "description": "通知时间",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Date"
+                  },
+                  "isRead": {
+                    "description": "是否阅读成功",
+                    "type": "boolean",
+                    "x-go-name": "IsRead"
+                  },
+                  "title": {
+                    "description": "通知标题",
+                    "type": "string",
+                    "x-go-name": "Title"
+                  }
+                },
+                "x-go-name": "ResultList"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "NoticeShowResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "description": "文章ID",
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "content": {
+                "description": "通知内容",
+                "type": "string",
+                "x-go-name": "Content"
+              },
+              "date": {
+                "description": "通知时间",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Date"
+              },
+              "isRead": {
+                "description": "是否阅读成功",
+                "type": "boolean",
+                "x-go-name": "IsRead"
+              },
+              "title": {
+                "description": "通知标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "SignResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "description": "Token信息",
+            "type": "string",
+            "x-go-name": "Token"
+          }
+        }
+      }
+    },
+    "SignupCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "TickersResponse": {
+      "description": "市场行情",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "C2C_EOS": {
+                "type": "object",
+                "properties": {
+                  "baseVol": {
+                    "description": "成交额",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "BaseVol"
+                  },
+                  "change": {
+                    "description": "涨跌幅",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Change"
+                  },
+                  "hight": {
+                    "description": "最高",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Hight"
+                  },
+                  "last": {
+                    "description": "最后成交价",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Last"
+                  },
+                  "name": {
+                    "description": "交易对",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Name"
+                  },
+                  "vol": {
+                    "description": "成交量",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Vol"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

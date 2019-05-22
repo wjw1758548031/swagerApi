@@ -1,0 +1,2795 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "魔方系统基础API",
+    "title": "魔方系统基础API",
+    "version": "0.0.1"
+  },
+  "host": "localhost:4001/api/v1",
+  "paths": {
+    "/account/address/add": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "添加收货地址信息",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "添加收货地址信息",
+        "operationId": "SetAddressParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "description": "手机号",
+                  "type": "string",
+                  "x-go-name": "Mobile"
+                },
+                "name": {
+                  "description": "姓名",
+                  "type": "string",
+                  "x-go-name": "Name"
+                },
+                "region": {
+                  "description": "地区",
+                  "type": "string",
+                  "x-go-name": "Region"
+                },
+                "street": {
+                  "description": "街道门牌号",
+                  "type": "string",
+                  "x-go-name": "Street"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/address/default": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "收货地址默认设置",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "收货地址默认设置",
+        "operationId": "SetDefaultAddressParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "地址长编号",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/address/del": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除收货地址",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "删除收货地址",
+        "operationId": "DelAddressParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BankCardDelResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/address/edit": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改收货地址信息",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "修改收货地址信息",
+        "operationId": "EditAddressParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "description": "手机号",
+                  "type": "string",
+                  "x-go-name": "Mobile"
+                },
+                "name": {
+                  "description": "姓名",
+                  "type": "string",
+                  "x-go-name": "Name"
+                },
+                "region": {
+                  "description": "地区",
+                  "type": "string",
+                  "x-go-name": "Region"
+                },
+                "street": {
+                  "description": "街道门牌号",
+                  "type": "string",
+                  "x-go-name": "Street"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/address/list": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "收货地址列表",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "收货地址列表",
+        "operationId": "AddressList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/avatar": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "更新用户头像",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "更新用户头像",
+        "operationId": "AvatarParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "type": "string",
+                  "x-go-name": "Avatar"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/balance/{coin}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户单个资金",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取用户单个资金",
+        "operationId": "GetBalanceParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Coin",
+            "name": "coin",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BalancesResponse"
+          }
+        }
+      }
+    },
+    "/account/balances": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户资金",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取用户资金",
+        "operationId": "Balances",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BalancesResponse"
+          }
+        }
+      }
+    },
+    "/account/bankcard/add": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "添加银行卡",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "添加银行卡",
+        "operationId": "BankCardAddParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bankName": {
+                  "description": "开户行名称",
+                  "type": "string",
+                  "x-go-name": "BankName"
+                },
+                "bankNumber": {
+                  "description": "卡号",
+                  "type": "string",
+                  "x-go-name": "BankNumber"
+                },
+                "bankType": {
+                  "description": "类型",
+                  "type": "string",
+                  "x-go-name": "BankType"
+                },
+                "branch": {
+                  "description": "分支行",
+                  "type": "string",
+                  "x-go-name": "Branch"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BankCardAddResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/bankcard/default": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "设置默认银行卡",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "设置默认银行卡",
+        "operationId": "SetDefaultBankCardParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "要修改的Id",
+                  "type": "string",
+                  "x-go-name": "ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BankCardDelResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/bankcard/del": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除银行卡",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "删除银行卡",
+        "operationId": "BankCardDelParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "数据id",
+                  "type": "string",
+                  "x-go-name": "Id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BankCardDelResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/bankcard/list": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取银行卡列表",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取银行卡列表",
+        "operationId": "BankCardList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BankCardListResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/bindEmail": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "完善邮箱信息",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "完善邮箱信息",
+        "operationId": "SetEmailParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authCode": {
+                  "description": "权限验证码",
+                  "type": "string",
+                  "x-go-name": "AuthCode"
+                },
+                "code": {
+                  "description": "邮箱验证码",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "email": {
+                  "description": "邮箱",
+                  "type": "string",
+                  "x-go-name": "Email"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetEmailResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/bindMobile": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "绑定手机号",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "绑定手机号",
+        "operationId": "BindMobileParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "authCode": {
+                  "description": "权限验证码",
+                  "type": "string",
+                  "x-go-name": "AuthCode"
+                },
+                "code": {
+                  "description": "邮箱验证码",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "mobile": {
+                  "description": "邮箱",
+                  "type": "string",
+                  "x-go-name": "Mobile"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/BindMobileResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/cardInfo": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取银行卡信息",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取银行卡信息",
+        "operationId": "CardInfoParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cardNumber": {
+                  "description": "email",
+                  "type": "string",
+                  "x-go-name": "CardNumber"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CardInfoResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/changePassword": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "改变密码",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "改变密码",
+        "operationId": "ChangePasswordParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "oldPassword",
+                "newPassword"
+              ],
+              "properties": {
+                "newPassword": {
+                  "description": "新密码",
+                  "type": "string",
+                  "x-go-name": "NewPassword"
+                },
+                "oldPassword": {
+                  "description": "老密码",
+                  "type": "string",
+                  "x-go-name": "OldPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ChangePasswordResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/changePayPassword": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改支付密码",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "修改支付密码",
+        "operationId": "ChangePayPasswordParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "验证码",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "newPayPassword": {
+                  "description": "新支付密码",
+                  "type": "string",
+                  "x-go-name": "NewPayPassword"
+                },
+                "oldPayPassword": {
+                  "description": "旧密码",
+                  "type": "string",
+                  "x-go-name": "OldPayPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ChangePayPasswordResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/createWalletAddress": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "创建钱包地址",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "创建钱包地址",
+        "operationId": "CreateWalletAddressParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "是否成功",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/CreateWalletAddressResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/feedback/add": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "意见反馈",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "意见反馈",
+        "operationId": "FeedBackAddParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "description": "内容",
+                  "type": "string",
+                  "x-go-name": "Content"
+                },
+                "screenshots": {
+                  "description": "截图",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "x-go-name": "Screenshots"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/FeedBackAddResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/getBindEmailOrMobileCode": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取绑定邮箱或者手机验证码",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取绑定邮箱或者手机验证码",
+        "operationId": "GetBindEmailOrMobileCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "邮箱或者手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetBindEmailOrMobileCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/getCertificateStatus": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取用户实名状态",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取用户实名状态",
+        "operationId": "GetCertificateStatusParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/getCode": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取验证码（登录后敏感操作）",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "获取验证码（登录后敏感操作）",
+        "operationId": "GetCodeParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Account",
+            "name": "account",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          }
+        }
+      }
+    },
+    "/account/merchantCA": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "商户认证",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "商户认证",
+        "operationId": "MerchantCAParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "backCard": {
+                  "description": "身分证背面照片",
+                  "type": "string",
+                  "x-go-name": "BackCard"
+                },
+                "businessAddress": {
+                  "description": "企业地址",
+                  "type": "string",
+                  "x-go-name": "BusinessAddress"
+                },
+                "businessLicense": {
+                  "description": "营业执照",
+                  "type": "string",
+                  "x-go-name": "BusinessLicense"
+                },
+                "businessLogo": {
+                  "description": "企业LOGO",
+                  "type": "string",
+                  "x-go-name": "BusinessLogo"
+                },
+                "businessName": {
+                  "description": "企业名称",
+                  "type": "string",
+                  "x-go-name": "BusinessName"
+                },
+                "businessNumber": {
+                  "description": "企业注册号",
+                  "type": "string",
+                  "x-go-name": "BusinessNumber"
+                },
+                "cardNumber": {
+                  "description": "身分证或护照号码",
+                  "type": "string",
+                  "x-go-name": "CardNumber"
+                },
+                "cardType": {
+                  "description": "证件类型",
+                  "type": "string",
+                  "x-go-name": "CardType"
+                },
+                "frontCard": {
+                  "description": "身分证正面照片",
+                  "type": "string",
+                  "x-go-name": "FrontCard"
+                },
+                "truename": {
+                  "description": "真实姓名",
+                  "type": "string",
+                  "x-go-name": "TrueName"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/MerchantCAResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/moneyHistory": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "财务记录",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "财务记录",
+        "operationId": "MoneyHistoryParam",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "StartTime",
+            "name": "startTime",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "EndTime",
+            "name": "endTime",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Coin",
+            "name": "coin",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Type",
+            "name": "type",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/moneyHistoryDetail/{id}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "记录详细",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "记录详细",
+        "operationId": "MoneyHistoryDetailParam",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/setPayPassword": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "设置支付密码",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "设置支付密码",
+        "operationId": "SetPayPasswordParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "description": "验证码",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "payPassword": {
+                  "description": "手机号",
+                  "type": "string",
+                  "x-go-name": "PayPassword"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SetPayPasswordResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/transfer": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "转帐",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "转帐",
+        "operationId": "TransferParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "description": "地址",
+                  "type": "string",
+                  "x-go-name": "Address"
+                },
+                "amount": {
+                  "description": "数量",
+                  "type": "number",
+                  "format": "double",
+                  "x-go-name": "Amount"
+                },
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "memo": {
+                  "description": "备注",
+                  "type": "string",
+                  "x-go-name": "Memo"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/transfer/history": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "转帐历史",
+        "tags": [
+          "支付"
+        ],
+        "summary": "转帐历史",
+        "operationId": "TransferHistoryParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Coin",
+            "description": "币种",
+            "name": "coin",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Type",
+            "description": "方向",
+            "name": "type",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "x-go-name": "Method",
+            "description": "种类",
+            "name": "method",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "StartTime",
+            "description": "开始时间",
+            "name": "startTime",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "EndTime",
+            "description": "结束时间",
+            "name": "endTime",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/TransferHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/upload": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "单独文件上传",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "单独文件上传",
+        "operationId": "UploadParam",
+        "parameters": [
+          {
+            "type": "file",
+            "name": "UpFile",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UploadResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/userCA": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "实名认证1级",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "实名认证1级",
+        "operationId": "UserCAParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cardNumber": {
+                  "description": "证件号",
+                  "type": "string",
+                  "x-go-name": "CardNumber"
+                },
+                "cardType": {
+                  "description": "证件类型passport,idcard",
+                  "type": "string",
+                  "default": "idcard",
+                  "x-go-name": "CardType"
+                },
+                "code": {
+                  "description": "验证码",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "truename": {
+                  "description": "真实姓名",
+                  "type": "string",
+                  "x-go-name": "TrueName"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserCAResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/account/userCA2": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "实名认证2级",
+        "tags": [
+          "用户中心"
+        ],
+        "summary": "实名认证2级",
+        "operationId": "UserCA2Param",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "backCard": {
+                  "description": "身份证 反面",
+                  "type": "string",
+                  "x-go-name": "BackCard"
+                },
+                "frontCard": {
+                  "description": "身份证 正面",
+                  "type": "string",
+                  "x-go-name": "FrontCard"
+                },
+                "handImg": {
+                  "description": "手持照",
+                  "type": "string",
+                  "x-go-name": "HandImg"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UserCAResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/admin/notice/add": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "填加通知",
+        "tags": [
+          "通知"
+        ],
+        "summary": "填加通知",
+        "operationId": "NoticeAddParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "title",
+                "content",
+                "type"
+              ],
+              "properties": {
+                "content": {
+                  "description": "通知内容",
+                  "type": "string",
+                  "x-go-name": "Content"
+                },
+                "title": {
+                  "description": "通知标题",
+                  "type": "string",
+                  "x-go-name": "Title"
+                },
+                "type": {
+                  "description": "通知类型",
+                  "type": "string",
+                  "x-go-name": "Type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          }
+        }
+      }
+    },
+    "/admin/notice/edit/{id}": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "修改通知",
+        "tags": [
+          "通知"
+        ],
+        "summary": "修改通知",
+        "operationId": "NoticeEditParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "授权登录",
+        "tags": [
+          "公共"
+        ],
+        "summary": "授权登录",
+        "operationId": "AuthLoginParam",
+        "parameters": [
+          {
+            "x-go-name": "Code",
+            "name": "code",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AuthLoginResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/banners": {
+      "get": {
+        "description": "获取Banner",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取Banner",
+        "operationId": "BannersPrices",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SuccessResponse"
+          }
+        }
+      }
+    },
+    "/info": {
+      "get": {
+        "description": "获取网站配置信息",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取网站配置信息",
+        "operationId": "SiteInfo",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/InfoResponse"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "登陆",
+        "tags": [
+          "公共"
+        ],
+        "summary": "登陆",
+        "operationId": "SigninParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "description": "验证码,可能是OTP、邮箱、短信",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "expires": {
+                  "description": "过期时间,1为1天",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Expires"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignResponse"
+          },
+          "400": {
+            "$ref": "#/responses/SignError"
+          }
+        }
+      }
+    },
+    "/news": {
+      "get": {
+        "description": "获新闻列表",
+        "tags": [
+          "新闻"
+        ],
+        "summary": "获新闻列表",
+        "operationId": "NewsList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsListResponse"
+          }
+        }
+      }
+    },
+    "/news/show/{id}": {
+      "get": {
+        "description": "获取新闻详细内容",
+        "tags": [
+          "新闻"
+        ],
+        "operationId": "NewsShowParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NewsShowResponse"
+          }
+        }
+      }
+    },
+    "/notice/del/{id}": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "删除通知",
+        "tags": [
+          "通知"
+        ],
+        "summary": "删除通知",
+        "operationId": "NoticeDelParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          }
+        }
+      }
+    },
+    "/notice/list": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取通知列表",
+        "tags": [
+          "通知"
+        ],
+        "summary": "获取通知列表",
+        "operationId": "NoticeList",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NoticeListResponse"
+          }
+        }
+      }
+    },
+    "/notice/setNoticeAllStatus": {
+      "post": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "设置全部通知 (已读1 \\ 清除0)",
+        "tags": [
+          "通知"
+        ],
+        "summary": "设置全部通知 (已读1 \\ 清除0)",
+        "operationId": "SetNoticeAllStatusParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "description": "1 已读 0 清除",
+                  "type": "string",
+                  "x-go-name": "Status"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseSuccess"
+          }
+        }
+      }
+    },
+    "/notice/show/{id}": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "获取通知详细内容",
+        "tags": [
+          "通知"
+        ],
+        "summary": "获取通知详细内容",
+        "operationId": "NoticeShowParam",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "ID",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/NoticeShowResponse"
+          }
+        }
+      }
+    },
+    "/prices": {
+      "get": {
+        "description": "获取市场价格",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取市场价格",
+        "operationId": "GetPrices",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GetPricesResponse"
+          }
+        }
+      }
+    },
+    "/resetPassword": {
+      "post": {
+        "description": "重置密码",
+        "tags": [
+          "公共"
+        ],
+        "summary": "重置密码",
+        "operationId": "RestPasswordParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "password": {
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/RestPasswordResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/resetPassword/getCode": {
+      "post": {
+        "description": "获取重置密码验证码",
+        "tags": [
+          "公共"
+        ],
+        "summary": "获取重置密码验证码",
+        "operationId": "RestPasswordCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/RestPasswordCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signin/getCode": {
+      "get": {
+        "security": [
+          {
+            "authorizationHeaderToken": []
+          }
+        ],
+        "description": "登录时获取登录验证码",
+        "tags": [
+          "公共"
+        ],
+        "summary": "登录时获取登录验证码",
+        "operationId": "SigninCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SigninCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "description": "用户注册",
+        "tags": [
+          "公共"
+        ],
+        "summary": "注册",
+        "operationId": "SignupParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                },
+                "code": {
+                  "description": "验证码,可能是OTP、邮箱、短信",
+                  "type": "string",
+                  "x-go-name": "Code"
+                },
+                "expires": {
+                  "description": "过期时间,1为1天",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Expires"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string",
+                  "x-go-name": "Password"
+                },
+                "referrerId": {
+                  "description": "推荐人ID",
+                  "type": "string",
+                  "x-go-name": "ReferrerId"
+                },
+                "username": {
+                  "description": "用户名",
+                  "type": "string",
+                  "x-go-name": "UserName"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/signup/getCode": {
+      "post": {
+        "description": "注册时获取注册验证码",
+        "tags": [
+          "公共"
+        ],
+        "summary": "注册时获取注册验证码",
+        "operationId": "SignupCodeParam",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "description": "帐户,可能是邮箱或手机号",
+                  "type": "string",
+                  "x-go-name": "Account"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignupCodeResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    },
+    "/update/user": {
+      "post": {
+        "description": "修改用户信息",
+        "tags": [
+          "修改用户信息"
+        ],
+        "summary": "修改用户信息",
+        "operationId": "UpdateUser",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/SignResponse"
+          },
+          "400": {
+            "$ref": "#/responses/ResponseError"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "AmountLimitWithdrawResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "AuthLoginResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "openId": {
+                "description": "类型",
+                "type": "string",
+                "x-go-name": "OpenId"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BalancesResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "余额",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种",
+                "type": "object",
+                "properties": {
+                  "available": {
+                    "description": "可用余额",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Available"
+                  },
+                  "freeze": {
+                    "description": "冻结",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Freeze"
+                  },
+                  "lock": {
+                    "description": "锁定",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "Lock"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BankCardAddResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BankCardDelResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BankCardListResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "address": {
+                "description": "开户行地址",
+                "type": "string",
+                "x-go-name": "Address"
+              },
+              "branch": {
+                "description": "支行",
+                "type": "string",
+                "x-go-name": "Branch"
+              },
+              "name": {
+                "description": "银行名称",
+                "type": "string",
+                "x-go-name": "Name"
+              },
+              "number": {
+                "description": "银行卡号",
+                "type": "string",
+                "x-go-name": "Number"
+              },
+              "type": {
+                "description": "类型",
+                "type": "string",
+                "x-go-name": "Type"
+              }
+            },
+            "x-go-name": "ResultList"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "BindMobileResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "CardInfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "类别",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "CeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ChangePasswordResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ChangePayPasswordResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "CreateWalletAddressResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "DepositAndWithdrawResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "FeedBackAddsponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetBindEmailOrMobileCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "GetPricesResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "价格",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种价格",
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "InfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "authLevel": {
+            "description": "验证级别",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "AuthLevel"
+          },
+          "baseCoinList": {
+            "description": "支付币种列表",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-go-name": "BaseCoinList"
+          },
+          "coins": {
+            "description": "平台支持币种",
+            "type": "object",
+            "properties": {
+              "BTC": {
+                "description": "币种",
+                "type": "object",
+                "properties": {
+                  "alias": {
+                    "description": "简称",
+                    "type": "string",
+                    "x-go-name": "Alias"
+                  },
+                  "chineseName": {
+                    "description": "中文名",
+                    "type": "string",
+                    "x-go-name": "ChineseName"
+                  },
+                  "decimal": {
+                    "description": "小数位数",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Decimal"
+                  },
+                  "deposit": {
+                    "description": "开启充值",
+                    "type": "boolean",
+                    "x-go-name": "Deposit"
+                  },
+                  "englishName": {
+                    "description": "英文名",
+                    "type": "string",
+                    "x-go-name": "EnglishName"
+                  },
+                  "markets": {
+                    "description": "支持的交易市场 [\"C2C\", \"BTC\", \"USDT\"]",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "x-go-name": "Markets"
+                  },
+                  "state": {
+                    "description": "启用",
+                    "type": "boolean",
+                    "x-go-name": "State"
+                  },
+                  "trade": {
+                    "description": "开启交易",
+                    "type": "boolean",
+                    "x-go-name": "Trade"
+                  },
+                  "tradeFee": {
+                    "description": "交易手续费 0.1%",
+                    "type": "string",
+                    "x-go-name": "TradeFee"
+                  },
+                  "withdraw": {
+                    "description": "开启提现",
+                    "type": "boolean",
+                    "x-go-name": "Withdraw"
+                  },
+                  "withdrawalFee": {
+                    "description": "提现手续费 1%",
+                    "type": "string",
+                    "x-go-name": "WithdrawalFee"
+                  },
+                  "withdrawalLimit": {
+                    "description": "至少提现",
+                    "type": "number",
+                    "format": "double",
+                    "x-go-name": "WithdrawalLimit"
+                  }
+                }
+              }
+            },
+            "x-go-name": "Coins"
+          },
+          "email": {
+            "description": "邮箱",
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "mobile": {
+            "description": "手机",
+            "type": "string",
+            "x-go-name": "Mobile"
+          },
+          "prices": {
+            "description": "市场价格",
+            "type": "object",
+            "x-go-name": "Prices"
+          },
+          "siteinfo": {
+            "description": "网站信息",
+            "type": "object",
+            "properties": {
+              "links": {
+                "description": "友情链接列表",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "x-go-name": "Links"
+              },
+              "logo": {
+                "description": "网站LOGO地址",
+                "type": "string",
+                "x-go-name": "Logo"
+              },
+              "title": {
+                "description": "网站标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "SiteInfo"
+          },
+          "truename": {
+            "description": "真实姓名",
+            "type": "string",
+            "x-go-name": "TrueName"
+          },
+          "uid": {
+            "description": "用户ID",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "UID"
+          },
+          "uid2": {
+            "description": "objectid",
+            "type": "string",
+            "x-go-name": "UID2"
+          },
+          "username": {
+            "description": "用户名",
+            "type": "string",
+            "x-go-name": "UserName"
+          }
+        }
+      }
+    },
+    "MerchantCAResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "NewsShowResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "description": "文章ID",
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "content": {
+                "description": "新闻内容",
+                "type": "string",
+                "x-go-name": "Content"
+              },
+              "date": {
+                "description": "新闻时间",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Date"
+              },
+              "title": {
+                "description": "新闻标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "NoticeListResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "count": {
+                "description": "数量",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Count"
+              },
+              "resultList": {
+                "description": "结果列表",
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "description": "文章ID",
+                    "type": "string",
+                    "x-go-name": "ID"
+                  },
+                  "date": {
+                    "description": "通知时间",
+                    "type": "integer",
+                    "format": "int64",
+                    "x-go-name": "Date"
+                  },
+                  "isRead": {
+                    "description": "是否阅读成功",
+                    "type": "boolean",
+                    "x-go-name": "IsRead"
+                  },
+                  "title": {
+                    "description": "通知标题",
+                    "type": "string",
+                    "x-go-name": "Title"
+                  }
+                },
+                "x-go-name": "ResultList"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "NoticeShowResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "object",
+            "properties": {
+              "_id": {
+                "description": "文章ID",
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "content": {
+                "description": "通知内容",
+                "type": "string",
+                "x-go-name": "Content"
+              },
+              "date": {
+                "description": "通知时间",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Date"
+              },
+              "isRead": {
+                "description": "是否阅读成功",
+                "type": "boolean",
+                "x-go-name": "IsRead"
+              },
+              "title": {
+                "description": "通知标题",
+                "type": "string",
+                "x-go-name": "Title"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "ResponseError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "ResponseSuccess": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "RestPasswordCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "RestPasswordResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SetAddressResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SetEmailResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SetPayPasswordResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SignError": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "authType": {
+            "description": "验证类型",
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "boolean",
+                "x-go-name": "Email"
+              },
+              "mobile": {
+                "type": "boolean",
+                "x-go-name": "Mobile"
+              },
+              "otp": {
+                "type": "boolean",
+                "x-go-name": "Otp"
+              }
+            },
+            "x-go-name": "AuthType"
+          },
+          "error": {
+            "description": "错误信息",
+            "type": "string",
+            "x-go-name": "Error"
+          }
+        }
+      }
+    },
+    "SignResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "description": "Token信息",
+            "type": "string",
+            "x-go-name": "Token"
+          }
+        }
+      }
+    },
+    "SigninCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "SignupCodeResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "验证码",
+            "type": "string",
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "TransferHistoryResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "coin": {
+                  "description": "币种",
+                  "type": "string",
+                  "x-go-name": "Coin"
+                },
+                "endTime": {
+                  "description": "结束时间",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "EndTime"
+                },
+                "method": {
+                  "description": "种类",
+                  "type": "integer",
+                  "format": "int32",
+                  "x-go-name": "Method"
+                },
+                "startTime": {
+                  "description": "开始时间",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "StartTime"
+                },
+                "type": {
+                  "description": "方向",
+                  "type": "integer",
+                  "format": "int32",
+                  "x-go-name": "Type"
+                },
+                "uid": {
+                  "description": "用户ID",
+                  "type": "integer",
+                  "format": "int64",
+                  "x-go-name": "Uid"
+                }
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "UploadResponse": {
+      "schema": {
+        "type": "object"
+      }
+    },
+    "UserCAInfoResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "authLevel": {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "AuthLevel"
+          },
+          "credentials": {
+            "type": "object",
+            "properties": {
+              "handImg": {
+                "description": "手持照片",
+                "type": "string",
+                "x-go-name": "HandImg"
+              },
+              "idCardA": {
+                "description": "身份证正面",
+                "type": "string",
+                "x-go-name": "IdCardA"
+              },
+              "idCardB": {
+                "description": "身份证反面",
+                "type": "string",
+                "x-go-name": "IdCardB"
+              },
+              "reason": {
+                "description": "原因",
+                "type": "string",
+                "x-go-name": "Reason"
+              },
+              "status": {
+                "description": "状态",
+                "type": "integer",
+                "format": "int64",
+                "x-go-name": "Status"
+              }
+            },
+            "x-go-name": "Credentials"
+          },
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    },
+    "UserCAResponse": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "suc": {
+            "description": "是否成功",
+            "type": "boolean",
+            "x-go-name": "Suc"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorizationHeaderToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
